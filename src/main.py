@@ -55,5 +55,5 @@ class Runner:
 
 
 if __name__ == '__main__':
-    Runner().start(os.getenv('ERICK_BOA_USERNAME'), os.getenv('ERICK_BOA_PASSWORD'), 'erick')
-    Runner().start(os.getenv('BRIT_BOA_USERNAME'), os.getenv('BRIT_BOA_PASSWORD'), 'brit')
+    Runner().start(os.getenv('USER1_BOA_USERNAME'), os.getenv('USER1_BOA_PASSWORD'), 'USER1')
+    Runner().start(os.getenv('USER2_BOA_USERNAME'), os.getenv('USER2_BOA_PASSWORD'), 'USER2')
