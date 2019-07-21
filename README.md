@@ -1,5 +1,8 @@
 # BankofAmerica-Web-Scraper
 
+
+[![PyPI version](https://badge.fury.io/py/boas.svg)](https://badge.fury.io/py/boas)
+
 Selenium web scraper used to pull personal financial data from bankofamerica.com
 
 
