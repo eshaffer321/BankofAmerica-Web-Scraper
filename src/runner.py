@@ -1,12 +1,11 @@
 from dotenv import load_dotenv
 
 import logging
-from page import HomePage, MyAccountsPage, SignOnV2Page
-from parser import AccountPageIdentifier
+from src.page import HomePage, MyAccountsPage, SignOnV2Page
+from src.parser import AccountPageIdentifier
 
 from selenium import webdriver
 import os
-import time
 import requests
 
 logging.basicConfig(filename='app.log', filemode='w', format='%(asctime)s - %(message)s')

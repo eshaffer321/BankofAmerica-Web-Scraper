@@ -1,5 +1,5 @@
 import unittest
-from page import HomePage
+from src.page import HomePage
 from selenium import webdriver
 
 

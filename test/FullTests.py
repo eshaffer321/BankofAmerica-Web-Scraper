@@ -1,6 +1,6 @@
 import unittest
-from page import HomePage, MyAccountsPage
-from parser import AccountPageIdentifier
+from src.page import HomePage, MyAccountsPage
+from src.parser import AccountPageIdentifier
 from selenium import webdriver
 
 

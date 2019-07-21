@@ -5,3 +5,6 @@ key.json
 __pycache__/
 accounts.json
 app.log
+boas.egg-info/
+dist/
+build/

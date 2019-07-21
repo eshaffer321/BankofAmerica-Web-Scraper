@@ -6,7 +6,7 @@ import json
 import logging
 import threading
 
-from runner import Runner
+from src.runner import Runner
 from knack import CLI
 from knack.commands import CLICommandsLoader, CommandGroup
 from knack.arguments import ArgumentsContext

@@ -8,19 +8,21 @@ This web scraper will pull account balances and all transactions from credit and
 used with a [node.js server](https://github.com/eshaffer321/BankOfAmerica-2-GoogleSheet-API) which will re-categorize and
 insert into a [google sheet](https://docs.google.com/spreadsheets/d/14GYLeWTUBPFWYzXMAJJV4YPmwcsf6vabkQ0-CeHSqHQ/edit#gid=759515713). 
 
+## Installing
+
+To install dependencies, run
+```.env
+pip install boas
+```
+
 ## Usage
 
 To run the program in a multi-threaded way, using account details from `accounts.json` run
 ```.env
-python cli.py parse run --threaded-yes --file=accounts.json
+boas parse run --threaded-yes --file=accounts.json
 ```
 
-## Installing
 
-Make sure you have pip installed and virtual environment created and active. To install dependencies, run
-```.env
-pip install
-```
 ## Environment variables
 
 This project require a `.env` file or environment variables. The only value required is the sheet api endpoint of the 
@@ -72,13 +74,14 @@ To learn more about the page object design pattern, look at [the selenium docs](
 
 I have not found a way to run selenium in headless mode. It seems bank of america detects this and asks for a capcha, 
 which block logging in. I have not explored what options chrome driver might have to mask the headless mode.
- 
-## Testing
+
+## Development
+### Testing
 
 There is a few tests located in the test directory. These will test basic login functionality, account summary recording,
 and a full functional test of the scraper. Please replace the empty strings with your account information to run these tests.
 
 Here is an example run of a full functional test run:
 ```.env
-python FullTests.py
+python src/FullTests.py
 ```

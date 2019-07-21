@@ -1,5 +1,5 @@
 import re
-from locators import HomePageLocators, MyAccountLocators, CheckingLocators, CheckingDetailsRow, CreditLocators, \
+from src.locators import HomePageLocators, MyAccountLocators, CheckingLocators, CheckingDetailsRow, CreditLocators, \
     CreditRowLocators, CreditDetailTable, SignOnV2Locator
 
 
