@@ -8,6 +8,13 @@ This web scraper will pull account balances and all transactions from credit and
 used with a [node.js server](https://github.com/eshaffer321/BankOfAmerica-2-GoogleSheet-API) which will re-categorize and
 insert into a [google sheet](https://docs.google.com/spreadsheets/d/14GYLeWTUBPFWYzXMAJJV4YPmwcsf6vabkQ0-CeHSqHQ/edit#gid=759515713). 
 
+## Usage
+
+To run the program in a multi-threaded way, using account details from `accounts.json` run
+```.env
+python cli.py parse run --threaded-yes --file=accounts.json
+```
+
 ## Installing
 
 Make sure you have pip installed and virtual environment created and active. To install dependencies, run
@@ -16,17 +23,29 @@ pip install
 ```
 ## Environment variables
 
-This project require a .env file. This will include BOA account credentials as well as the endpoint of the 
-[node.js server](https://github.com/eshaffer321/BankOfAmerica-2-GoogleSheet-API). Multiple user accounts can be placed in
-the `.env` file. Please just add the additional runs to `main.py` 
+This project require a `.env` file or environment variables. The only value required is the sheet api endpoint of the 
+[node.js server](https://github.com/eshaffer321/BankOfAmerica-2-GoogleSheet-API).
 
 Here is an example file:
 ```
 SHEET_API=
-USER1_BOA_USERNAME=
-USER1_BOA_PASSWORD=
-USER2_BOA_USERNAME=
-USER2_BOA_PASSWORD=
+```
+
+### Account File
+The account credentials are stored in a json file. If you would like to login even with the security v2 security,
+ you can provide the security answers in the file.
+```.env
+[{
+  "name": "",
+  "username": "",
+  "password": "",
+  "security_questions": {
+    "What is the name of your first employer?": "",
+    "What is the street you grew up on": "",
+    "What is the name of your best friend": ""
+  }
+}]
+
 ```
 
 ## How it works
@@ -51,13 +70,8 @@ To learn more about the page object design pattern, look at [the selenium docs](
 
 ## Important Notes / Future work
 
-The first time you run this program, bank of america will ask a security question. I typically try to type it in quickly and
- hit the remember this computer button. This may happen at random intervals while
-using the program. There currently isn't a way around these, and I still need to develop a solution. 
-
-Also, I have not found
-a way to run selenium in headless mode. It seems bank of america detects this and asks for a capcha, which block loggin in.
- I have not explored what options chrome driver might have to mask the headless mode.
+I have not found a way to run selenium in headless mode. It seems bank of america detects this and asks for a capcha, 
+which block logging in. I have not explored what options chrome driver might have to mask the headless mode.
  
 ## Testing
 

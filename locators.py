@@ -65,3 +65,10 @@ class CheckingDetailsRow(object):
     CATEGORY = (By.CLASS_NAME, 'lblCategoryName')
     MERCHANT = (By.CLASS_NAME, 'lblMerchantName')
     DESCRIPTION = (By.CLASS_NAME, 'desc-holder')
+
+
+class SignOnV2Locator:
+    ANSWER_SECTION = (By.CLASS_NAME, "answer-section")
+    QUESTION = (By.TAG_NAME, 'label')
+    INPUT_ANSWER = (By.ID, 'tlpvt-challenge-answer')
+    SUBMIT_BUTTON = (By.ID, 'verify-cq-submit')

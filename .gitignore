@@ -3,3 +3,5 @@
 key.json
 .DS_Store
 __pycache__/
+accounts.json
+app.log

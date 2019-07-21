@@ -1,6 +1,6 @@
 import re
 from locators import HomePageLocators, MyAccountLocators, CheckingLocators, CheckingDetailsRow, CreditLocators, \
-    CreditRowLocators, CreditDetailTable
+    CreditRowLocators, CreditDetailTable, SignOnV2Locator
 
 
 class BasePage(object):
@@ -208,3 +208,15 @@ class SavingPage(BasePage):
     @staticmethod
     def get_description(row):
         return row.find_element(*CheckingDetailsRow.DESCRIPTION).text
+
+
+class SignOnV2Page(BasePage):
+
+    def get_question(self):
+        return self.driver.find_element(*SignOnV2Locator.ANSWER_SECTION).find_element(*SignOnV2Locator.QUESTION).text
+
+    def insert_answer(self, answer):
+        return self.driver.find_element(*SignOnV2Locator.INPUT_ANSWER).send_keys(answer)
+
+    def submit(self):
+        self.driver.find_element(*SignOnV2Locator.SUBMIT_BUTTON).click()
