@@ -61,7 +61,7 @@ def parse_handler(file=None, threaded=None, url=None):
                     Runner(account, url).start()
 
     else:
-        print('File not found')
+        print('Could not find file: ' + file)
         exit(1)
 
     return 'Finished'
