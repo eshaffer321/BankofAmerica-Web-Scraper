@@ -1,4 +1,4 @@
-from src.page import CheckingPage, CreditPage
+from page import CheckingPage, CreditPage
 from datetime import datetime
 import time
 

@@ -15,6 +15,8 @@ insert into a [google sheet](https://docs.google.com/spreadsheets/d/14GYLeWTUBPF
 
 To install dependencies, run
 ```.env
+pip install python-dotenv
+pip install knack
 pip install boas
 ```
 
@@ -22,7 +24,7 @@ pip install boas
 
 To run the program in a multi-threaded way, using account details from `accounts.json` run
 ```.env
-boas parse run --threaded-yes --file=accounts.json
+boas parse run --threaded=yes --file=accounts.json
 ```
 
 

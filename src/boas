@@ -3,10 +3,9 @@
 import os
 import sys
 import json
-import logging
 import threading
 
-from src.runner import Runner
+from runner import Runner
 from knack import CLI
 from knack.commands import CLICommandsLoader, CommandGroup
 from knack.arguments import ArgumentsContext
@@ -15,8 +14,6 @@ from knack.help import CLIHelp
 from knack.help_files import helps
 
 cli_name = os.path.basename(__file__)
-
-logging.basicConfig(filename='app.log', filemode='w', format='%(asctime)s - %(message)s', level=logging.INFO)
 
 helps['parse run'] = """
     type: command
@@ -27,16 +24,15 @@ helps['parse run'] = """
 """.format(cli_name=cli_name)
 
 
-def threaded_start(account):
-    Runner(account).start()
+def threaded_start(account, url):
+    Runner(account, url).start()
 
 
-def parse_handler(file=None, threaded=None, send=None):
-    accounts = []
+def parse_handler(file=None, threaded=None, url=None):
 
     if os.path.isfile(file):
 
-        logging.info('Found file ' + file)
+        print('Found file ' + file)
 
         with open(file) as json_file:
 
@@ -44,11 +40,11 @@ def parse_handler(file=None, threaded=None, send=None):
 
             if threaded:
 
-                logging.info('Running in multi-threaded mode')
+                print('Running in multi-threaded mode')
 
                 thread_list = []
                 for account in data:
-                    thread = threading.Thread(target=threaded_start, args=(account,))
+                    thread = threading.Thread(target=threaded_start, args=(account,url,))
                     thread_list.append(thread)
 
                 for thread_item in thread_list:
@@ -59,10 +55,10 @@ def parse_handler(file=None, threaded=None, send=None):
 
             else:
 
-                logging.info('Running in single-threaded mode')
+                print('Running in single-threaded mode')
 
-                for account in accounts:
-                    Runner(account).start()
+                for account in data:
+                    Runner(account, url).start()
 
     else:
         print('File not found')
@@ -72,7 +68,6 @@ def parse_handler(file=None, threaded=None, send=None):
 
 
 WELCOME_MESSAGE = r"""
-
   ____              _             __                                _                
  |  _ \            | |           / _|     /\                       (_)               
  | |_) | __ _ _ __ | | __   ___ | |_     /  \   _ __ ___   ___ _ __ _  ___ __ _      
@@ -86,8 +81,6 @@ WELCOME_MESSAGE = r"""
      \/  \/ \___|_.__/  |_____/ \___|_|  \__,_| .__/ \___|_|     \_____|______|_____|
                                               | |                                    
                                               |_|                                    
-
-
 Easily web scraper bankofamerica.com!
 """
 
@@ -110,6 +103,7 @@ class MyCommandsLoader(CLICommandsLoader):
     def load_arguments(self, command):
         with ArgumentsContext(self, 'parse run') as ac:
             ac.argument('file', type=str, default="accounts.json")
+            ac.argument('url', type=str)
         super(MyCommandsLoader, self).load_arguments(command)
 
 
