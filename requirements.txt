@@ -1,2 +1,5 @@
-knack
 selenium==3.141.0
+Flask==1.1.1
+Werkzeug==0.15.5
+requests==2.22.0
+pygogo==0.12.0

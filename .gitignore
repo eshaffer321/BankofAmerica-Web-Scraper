@@ -8,3 +8,4 @@ app.log
 boas.egg-info/
 dist/
 build/
+var/*

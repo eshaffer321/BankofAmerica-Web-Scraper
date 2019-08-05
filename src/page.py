@@ -1,5 +1,5 @@
 import re
-from locators import HomePageLocators, MyAccountLocators, CheckingLocators, CheckingDetailsRow, CreditLocators, \
+from src.locators import HomePageLocators, MyAccountLocators, CheckingLocators, CheckingDetailsRow, CreditLocators, \
     CreditRowLocators, CreditDetailTable, SignOnV2Locator
 
 
@@ -217,6 +217,9 @@ class SignOnV2Page(BasePage):
 
     def insert_answer(self, answer):
         return self.driver.find_element(*SignOnV2Locator.INPUT_ANSWER).send_keys(answer)
+
+    def click_recognize(self):
+        return self.driver.find_element(*SignOnV2Locator.REMEMBER_RADIO).click()
 
     def submit(self):
         self.driver.find_element(*SignOnV2Locator.SUBMIT_BUTTON).click()

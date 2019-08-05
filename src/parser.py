@@ -1,4 +1,4 @@
-from page import CheckingPage, CreditPage
+from src.page import CheckingPage, CreditPage
 from datetime import datetime
 import time
 
@@ -54,7 +54,7 @@ class CheckingParser:
 
                 new_row['category'] = self.page.get_category(details_cell)
 
-                new_row['merchant'] = self.page.get_merchant(details_cell)
+                new_row['merchant_name'] = self.page.get_merchant(details_cell)
 
                 new_row['description'] = self.page.get_description(details_cell)
 

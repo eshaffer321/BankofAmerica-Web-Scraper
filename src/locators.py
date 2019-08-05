@@ -72,3 +72,4 @@ class SignOnV2Locator:
     QUESTION = (By.TAG_NAME, 'label')
     INPUT_ANSWER = (By.ID, 'tlpvt-challenge-answer')
     SUBMIT_BUTTON = (By.ID, 'verify-cq-submit')
+    REMEMBER_RADIO = (By.ID, 'yes-recognize')

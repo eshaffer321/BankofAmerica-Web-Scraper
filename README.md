@@ -1,8 +1,6 @@
 # BankofAmerica-Web-Scraper
 
 
-[![PyPI version](https://badge.fury.io/py/boas.svg)](https://badge.fury.io/py/boas)
-
 Selenium web scraper used to pull personal financial data from bankofamerica.com
 
 
@@ -15,16 +13,15 @@ insert into a [google sheet](https://docs.google.com/spreadsheets/d/14GYLeWTUBPF
 
 To install dependencies, run
 ```.env
-pip install python-dotenv
-pip install knack
-pip install boas
+pip install requirements.txt
 ```
 
 ## Usage
 
-To run the program in a multi-threaded way, using account details from `accounts.json` run
+To run the program:
 ```.env
-boas parse run --threaded=yes --file=accounts.json
+python index.py
+curl localhost:5000
 ```
 
 
@@ -40,7 +37,8 @@ SHEET_API=
 
 ### Account File
 The account credentials are stored in a json file. If you would like to login even with the security v2 security,
- you can provide the security answers in the file.
+ you can provide the security answers in the file. This is not required, but the program will not work if it encounters
+ these questions while parsing.
 ```.env
 [{
   "name": "",
@@ -78,7 +76,7 @@ To learn more about the page object design pattern, look at [the selenium docs](
 ## Important Notes / Future work
 
 I have not found a way to run selenium in headless mode. It seems bank of america detects this and asks for a capcha, 
-which block logging in. I have not explored what options chrome driver might have to mask the headless mode.
+which blocks logging in. I have not explored what options chrome driver might have to mask the headless mode.
 
 ## Development
 ### Testing
@@ -88,5 +86,5 @@ and a full functional test of the scraper. Please replace the empty strings with
 
 Here is an example run of a full functional test run:
 ```.env
-python src/FullTests.py
+python test/FullTests.py
 ```
