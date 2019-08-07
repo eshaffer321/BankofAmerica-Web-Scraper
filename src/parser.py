@@ -1,5 +1,6 @@
 from src.page import CheckingPage, CreditPage
 from datetime import datetime
+from selenium.common.exceptions import NoSuchElementException
 import time
 
 
@@ -74,6 +75,12 @@ class CreditParser:
     def parse(self, account, row_list):
 
         self.page.driver.get(account['url'])
+
+        try:
+            self.page.get_no_transaction_message()
+            return
+        except NoSuchElementException:
+            pass
 
         rows = self.page.get_transaction_rows()
 

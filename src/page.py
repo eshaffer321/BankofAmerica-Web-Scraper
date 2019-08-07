@@ -165,6 +165,9 @@ class CreditPage(BasePage):
     def get_category(row):
         return row.find_element(*CreditDetailTable.CATEGORY_NAME).text
 
+    def get_no_transaction_message(self):
+        return self.driver.find_element(*CreditLocators.NO_TRANSACTIONS)
+
 
 class SavingPage(BasePage):
 

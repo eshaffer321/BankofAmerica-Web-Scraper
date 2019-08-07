@@ -7,6 +7,7 @@ import logging
 import traceback
 from flask import Flask
 from src.runner import Runner
+from os.path import expanduser
 
 app = Flask(__name__)
 
@@ -15,7 +16,7 @@ formatter = logging.Formatter(log_format)
 
 logger = gogo.Gogo(
     'index',
-    low_hdlr=gogo.handlers.file_hdlr('~/log/boa-scraper.log'),
+    low_hdlr=gogo.handlers.file_hdlr(expanduser("~") + '/log/boa-scraper.log'),
     low_formatter=formatter,
     high_level='error',
     high_formatter=formatter).logger
@@ -38,9 +39,13 @@ def hello():
                     logger.error('Username and password are required')
 
                 for account in data:
-                    Runner(account,
-                           'http://localhost:80',
-                           logger).start()
+                    runner = Runner(account,
+                                    'http://localhost:80',
+                                    logger)
+                    try:
+                        runner.start()
+                    except:
+                        runner.driver.quit()
 
         else:
             if not os.getenv('ACCOUNT_FILE_NAME'):

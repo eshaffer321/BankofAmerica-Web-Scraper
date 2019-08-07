@@ -22,6 +22,8 @@ class CreditLocators(object):
     MAIN_TABLE = (By.CLASS_NAME, 'trans-tbody-wrap')
     ROW_LIST = (By.TAG_NAME, 'tr')
 
+    NO_TRANSACTIONS = (By.ID, 'no-trans-to-display')
+
 
 class CreditRowLocators(object):
     DATE_CELL = (By.CLASS_NAME, 'trans-date-cell')
