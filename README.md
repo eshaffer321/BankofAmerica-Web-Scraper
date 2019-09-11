@@ -11,35 +11,29 @@ insert into a [google sheet](https://docs.google.com/spreadsheets/d/14GYLeWTUBPF
 
 ## Installing
 
-To install dependencies, run
-```.env
+To install dependencies and do local development, run
+```bash
 pip install requirements.txt
 ```
 
 ## Usage
 
-To run the program:
-```.env
-python index.py
-curl localhost:5000
+To run the program with docker (preferred):
+```bash
+docker run -d -p 5000:5000 erickshaffer/boa-scraper:latest
 ```
 
 
 ## Environment variables
 
-This project require a `.env` file or environment variables. The only value required is the sheet api endpoint of the 
-[node.js server](https://github.com/eshaffer321/BankOfAmerica-2-GoogleSheet-API).
-
-Here is an example file:
-```
-SHEET_API=
-```
+This project is meant to be used with a `docker-compose` file located in the 
+[node.js server](https://github.com/eshaffer321/BankOfAmerica-2-GoogleSheet-API) repository.
 
 ### Account File
 The account credentials are stored in a json file. If you would like to login even with the security v2 security,
  you can provide the security answers in the file. This is not required, but the program will not work if it encounters
- these questions while parsing.
-```.env
+ these questions while parsing. This file need to located in the directory /app/var/account
+```json
 [{
   "name": "",
   "username": "",
@@ -72,11 +66,6 @@ case I did not have many important transactions in savings. The amounts are stil
 in the sheet. If you would like to implement savings, just create another entry in `page.py` and locators in `locator.py`.
 To learn more about the page object design pattern, look at [the selenium docs](https://selenium-python.readthedocs.io/page-objects.html)
 
-
-## Important Notes / Future work
-
-I have not found a way to run selenium in headless mode. It seems bank of america detects this and asks for a capcha, 
-which blocks logging in. I have not explored what options chrome driver might have to mask the headless mode.
 
 ## Development
 ### Testing

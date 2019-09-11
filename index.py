@@ -7,7 +7,6 @@ import logging
 import traceback
 from flask import Flask
 from src.runner import Runner
-from os.path import expanduser
 
 app = Flask(__name__)
 
@@ -16,16 +15,16 @@ formatter = logging.Formatter(log_format)
 
 logger = gogo.Gogo(
     'index',
-    low_hdlr=gogo.handlers.file_hdlr(expanduser("~") + '/log/boa-scraper.log'),
+    low_hdlr=gogo.handlers.file_hdlr('var/log/boa-scraper.log'),
     low_formatter=formatter,
     high_level='error',
     high_formatter=formatter).logger
 
 
 @app.route("/")
-def hello():
+def start():
     try:
-        path = os.getcwd() + "/var/accounts/" + os.getenv('ACCOUNT_FILE_NAME')
+        path = "var/accounts/" + os.getenv('ACCOUNT_FILE_NAME')
 
         if os.path.isfile(path):
 
@@ -40,7 +39,7 @@ def hello():
 
                 for account in data:
                     runner = Runner(account,
-                                    'http://localhost:80',
+                                    os.getenv('API_URL'),
                                     logger)
                     try:
                         runner.start()

@@ -1,7 +1,9 @@
 from src.page import HomePage, MyAccountsPage, SignOnV2Page
 from src.parser import AccountPageIdentifier
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.common.exceptions import NoSuchElementException
+from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import os
 import requests
 
@@ -17,10 +19,12 @@ class Runner:
 
     def __init__(self, account, url, logger):
         self.logger = logger
-        self.driver = webdriver.Chrome()
+        self.driver =webdriver.Remote(
+            command_executor='selenium-server:4444/wd/hub',
+            desired_capabilities=DesiredCapabilities.CHROME)
         self.driver.get('https://bankofamerica.com')
         self.account = account
-        self.url = url
+        self.url = 'api:80'
 
     def quit(self):
         self.driver.close()
@@ -98,15 +102,15 @@ class Runner:
                 self.logger.info('Successfully parsed ' + account['name'])
 
         if self.url:
-            self.logger.info('Sending transaction data to ' + os.getenv('SHEET_API') + '/transaction')
+            self.logger.info('Sending transaction data to api:80/transaction')
             r1 = requests.post(self.url + '/transaction', json=row_list)
 
             self.logger.info(r1)
-            self.logger.info('Sending balance data to ' + os.getenv('SHEET_API') + '/update-balance')
+            self.logger.info('Sending balance data to api:80/update-balance')
             r2 = requests.post(self.url + '/update-balance', json=account_summary_list)
             self.logger.info(r2)
         else:
-            self.logger.info('No url set. Printing')
+            self.logger.info('No url set. Printing to stdout')
             print(row_list)
             print(account_summary_list)
 
