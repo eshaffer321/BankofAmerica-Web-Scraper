@@ -20,7 +20,7 @@ class Runner:
     def __init__(self, account, url, logger):
         self.logger = logger
         self.driver =webdriver.Remote(
-            command_executor='selenium-server:4444/wd/hub',
+            command_executor='http://selenium-server:4444/wd/hub',
             desired_capabilities=DesiredCapabilities.CHROME)
         self.driver.get('https://bankofamerica.com')
         self.account = account
